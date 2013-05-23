@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class TaskHypergraph<V> extends Hypergraph<V> {
+public class TaskHypergraph extends Hypergraph<String> {
 	private Hypernode start;
 	private Hypernode end;
-	public TaskHypergraph (V start, V end) {
+	public TaskHypergraph (String start, String end) {
 		List<Hypernode> nodes = getNodes();
 		
 		this.start = new Hypernode(start);
@@ -20,7 +20,7 @@ public class TaskHypergraph<V> extends Hypergraph<V> {
 	 * 
 	 * @return Una lista representando el camino más corto entre {@code start} y {@code end} en este {@link TaskHypergraph}
 	 */
-	public List<V> getShortestPath (Approach approach) {
+	public List<String> getShortestPath (Approach approach) {
 		//TODO
 		switch (approach) {
 			case EXACT:
@@ -30,13 +30,13 @@ public class TaskHypergraph<V> extends Hypergraph<V> {
 				return null;
 		}
 	}
-	private List<V> getShortestPathExact() {
+	private List<String> getShortestPathExact() {
 		int min = Integer.MAX_VALUE;
 		for (Hyperedge e : start.edges) {
 			min = Math.min(min, getShortestPathExact(e, end));
 		}
 		boolean reachedEnd = false;
-		List<V> path = new LinkedList<V>();
+		List<String> path = new LinkedList<String>();
 		Hyperedge actual;
 		while (!reachedEnd) {
 			
