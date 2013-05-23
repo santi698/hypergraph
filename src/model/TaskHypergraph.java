@@ -2,34 +2,38 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class TaskHypergraph extends Hypergraph<String> {
-	private Hypernode start;
-	private Hypernode end;
-	public TaskHypergraph (String start, String end) {
-		List<Hypernode> nodes = getNodes();
-		
-		this.start = new Hypernode(start);
+
+	private Node start;
+	private Node end;
+
+	public TaskHypergraph(String start, String end) {
+		List<Node> nodes = getNodes();
+
+		this.start = new Node(start);
 		nodes.add(this.start);
-		
-		this.end = new Hypernode(end);
+
+		this.end = new Node(end);
 		nodes.add(this.end);
 	}
+
 	/**
 	 * 
-	 * @return Una lista representando el camino m√°s corto entre {@code start} y {@code end} en este {@link TaskHypergraph}
+	 * @return Una lista representando el camino m·s corto entre {@code start} y
+	 *         {@code end} en este {@link TaskHypergraph}
 	 */
-	public List<String> getShortestPath (Approach approach) {
-		//TODO
+	public List<String> getShortestPath(Approach approach) {
+		// TODO
 		switch (approach) {
-			case EXACT:
-				return getShortestPathExact();
-			//TODO Agregar al menos un caso APPROX_*
-			default:
-				return null;
+		case EXACT:
+			return getShortestPathExact();
+			// TODO Agregar al menos un caso APPROX_*
+		default:
+			return null;
 		}
 	}
+
 	private List<String> getShortestPathExact() {
 		int min = Integer.MAX_VALUE;
 		for (Hyperedge e : start.edges) {
@@ -39,24 +43,26 @@ public class TaskHypergraph extends Hypergraph<String> {
 		List<String> path = new LinkedList<String>();
 		Hyperedge actual;
 		while (!reachedEnd) {
-			
+
 		}
 		return path;
 	}
-	
-	private int getShortestPathExact(Hyperedge e, Hypernode end) {
+
+	private int getShortestPathExact(Hyperedge e, Node end) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	/**
-	 * Definir ac√° todos los posibles m√©todos de conseguir el camino mas corto. El m√©todo {@code getShortestPath}
-	 * recibe un Approach para decidir que m√©todo utilizar. 
+	 * Definir ac· todos los posibles mÈtodos de conseguir el camino mas corto.
+	 * El mÈtodo {@code getShortestPath} recibe un Approach para decidir que
+	 * mÈtodo utilizar.
+	 * 
 	 * @author santi698
-	 *
+	 * 
 	 */
 	public static enum Approach {
-		EXACT, APPROX_HILLCLIMBING //etc
+		EXACT, APPROX_HILLCLIMBING // etc
 	}
 
 }
