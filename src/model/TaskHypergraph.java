@@ -7,7 +7,18 @@ public class TaskHypergraph extends Hypergraph<String> {
 
 	private Node start;
 	private Node end;
-
+	
+	/**
+	 * Definir acï¿½ todos los posibles mï¿½todos de conseguir el camino mas corto.
+	 * El mï¿½todo {@code getShortestPath} recibe un Approach para decidir que
+	 * mï¿½todo utilizar.
+	 * 
+	 * @author santi698
+	 * 
+	 */
+	public static enum Approach {
+		EXACT, APPROX_HILLCLIMBING // etc
+	}
 	public TaskHypergraph(String start, String end) {
 		List<Node> nodes = getNodes();
 
@@ -20,7 +31,7 @@ public class TaskHypergraph extends Hypergraph<String> {
 
 	/**
 	 * 
-	 * @return Una lista representando el camino más corto entre {@code start} y
+	 * @return Una lista representando el camino mï¿½s corto entre {@code start} y
 	 *         {@code end} en este {@link TaskHypergraph}
 	 */
 	public List<String> getShortestPath(Approach approach) {
@@ -41,28 +52,38 @@ public class TaskHypergraph extends Hypergraph<String> {
 		}
 		boolean reachedEnd = false;
 		List<String> path = new LinkedList<String>();
-		Hyperedge actual;
+		//Hyperedge actual;
 		while (!reachedEnd) {
 
 		}
 		return path;
 	}
 
-	private int getShortestPathExact(Hyperedge e, Node end) {
-		// TODO Auto-generated method stub
+	private int getShortestPathExact(Hyperedge start, Node end) {
+		//TODO
 		return 0;
 	}
-
 	/**
-	 * Definir acá todos los posibles métodos de conseguir el camino mas corto.
-	 * El método {@code getShortestPath} recibe un Approach para decidir que
-	 * método utilizar.
-	 * 
-	 * @author santi698
-	 * 
+	 * Crea un subgrafo del actual a partir de una lista de {@link Hyperedge}s
+	 * @param list la lista de aristas que contiene el subgrafo.
+	 * @return un nuevo hipergrafo que es subgrafo de este.
 	 */
-	public static enum Approach {
-		EXACT, APPROX_HILLCLIMBING // etc
+	public TaskHypergraph getSubgraph(List<String> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * Crea una representacion en formato DOT del grafo actual.
+	 * @return un string en formato DOT
+	 */
+	public String getDOTRep() {
+		//TODO
+		return null;
+	}
+
+	public String getHgRep() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

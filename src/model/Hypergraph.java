@@ -45,15 +45,24 @@ public abstract class Hypergraph<V> implements HypergraphIFace<V> {
 			this.consequences = new LinkedList<Node>();
 			this.visited = false;
 		}
+		public boolean isDone() {
+				for (Node n : requisites) {
+					if (!n.visited)
+						return false;
+				}
+			return true;
+		}
 	}
 
 	protected class Node {
+		public boolean visited;
 		public List<Hyperedge> edges;
 		public V data;
 
 		public Node(V data) {
 			this.data = data;
 			this.edges = new LinkedList<Hyperedge>();
+			this.visited = false;
 		}
 	}
 
