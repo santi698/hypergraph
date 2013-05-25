@@ -10,6 +10,5 @@ public interface HypergraphIFace<V> {
 	 * @param requisites una lista de los requisitos de la hiperarista.
 	 * @param consequences una lista de las consecuencias de la hiperarista.
 	 */
-	public void addHyperedge (int weight, List<V> requisites, List<V> consequences);
-	public void addNode (V data);
+	public void addHyperedge (String name, int weight, List<V> requisites, List<V> consequences);
 }
