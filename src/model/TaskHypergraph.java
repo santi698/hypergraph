@@ -19,14 +19,10 @@ public class TaskHypergraph extends Hypergraph<String> {
 	public static enum Approach {
 		EXACT, APPROX_HILLCLIMBING // etc
 	}
+	
 	public TaskHypergraph(String start, String end) {
-		List<Node> nodes = getNodes();
-
-		this.start = new Node(start);
-		nodes.add(this.start);
-
-		this.end = new Node(end);
-		nodes.add(this.end);
+		this.start = addNode(start);
+		this.end = addNode(end);
 	}
 
 	/**
@@ -63,25 +59,78 @@ public class TaskHypergraph extends Hypergraph<String> {
 		//TODO
 		return 0;
 	}
+	
 	/**
 	 * Crea un subgrafo del actual a partir de una lista de {@link Hyperedge}s
 	 * @param list la lista de aristas que contiene el subgrafo.
 	 * @return un nuevo hipergrafo que es subgrafo de este.
 	 */
 	public TaskHypergraph getSubgraph(List<String> list) {
-		// TODO Auto-generated method stub
-		return null;
+		TaskHypergraph subgraph = new TaskHypergraph(start.data, end.data);
+		
+		return subgraph;
 	}
+	
 	/**
 	 * Crea una representacion en formato DOT del grafo actual.
 	 * @return un string en formato DOT
 	 */
 	public String getDOTRep() {
-		//TODO
-		return null;
+		clearMarks();
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("digraph HyperGraph {" + '\n');
+		
+		for(Node node : getNodes())
+			getDOTRep(node, sb);
+
+		for(Hyperedge edge : getEdges() )
+			for(Node node : edge.consequences)
+				sb.append(edge.name + edge.weight + " -> " + node.data + ";");
+			
+		sb.append("}");
+		return sb.toString();
 	}
+	
+	private void getDOTRep(Node node, StringBuffer sb) {
+		sb.append(node.data + ";");
+		
+		for(Hyperedge edge : node.edges) {
+			if(!edge.visited) {
+				sb.append(edge.name + edge.weight + " [shape=box, label=\"" + edge.name + " (" + edge.weight +")\"];");
+				edge.visited = true;
+			}
+			sb.append(node.data + " -> " + edge.name + edge.weight + ";");
+		}
+	}
+	
+	/**
+	 * Crea una representacion en formato Hg del grafo actual.
+	 * @return un string en formato Hg
+	 */
 
 	public String getHgRep() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(start.data + '\n');
+		sb.append(end.data + '\n');
+
+		for(Hyperedge edge : getEdges()) {
+			sb.append("<" + edge.name + "><" + edge.weight +">");
+			appendListHgRep(edge.consequences, sb);
+			appendListHgRep(edge.requisites, sb);
+			sb.append('\n');
+		}
+		
+		return sb.toString();
+	}
+	
+	private void appendListHgRep(List<Node> list, StringBuffer sb) {
+		sb.append("<" + list.size() + ">");
+		for(Node node : list)
+			sb.append("<" + node.data + ">");
+	}
+	
+	public String getDOTRep(List<String> path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
