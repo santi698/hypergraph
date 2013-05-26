@@ -29,7 +29,7 @@ public class TaskHypergraphParser {
 	}
 	public static void main(String[] args) {
 		TaskHypergraphParser parser = new TaskHypergraphParser();
-		TaskHypergraph graph = parser.parse("A\nB\nC 10 3 A B C 1 D");
+		TaskHypergraph graph = parser.parse("A\nB\nX 10 2 A C 1 D\nY 8 3 A C D 1 B");
 		System.out.println(graph.getDOTRep());
 	}
 }

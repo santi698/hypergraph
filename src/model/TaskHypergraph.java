@@ -115,9 +115,10 @@ public class TaskHypergraph extends Hypergraph<String> {
 		sb.append(end.data + '\n');
 
 		for(Hyperedge edge : getEdges()) {
-			sb.append("<" + edge.name + "><" + edge.weight +">");
-			appendListHgRep(edge.consequences, sb);
+			sb.append(edge.name).append(" ").append(edge.weight).append(" ");
 			appendListHgRep(edge.requisites, sb);
+			appendListHgRep(edge.consequences, sb);
+			sb.deleteCharAt(sb.length()-1);
 			sb.append('\n');
 		}
 		
@@ -125,12 +126,12 @@ public class TaskHypergraph extends Hypergraph<String> {
 	}
 	
 	private void appendListHgRep(List<Node> list, StringBuffer sb) {
-		sb.append("<" + list.size() + ">");
+		sb.append(list.size()).append(" ");
 		for(Node node : list)
-			sb.append("<" + node.data + ">");
+			sb.append(node.data).append(" ");
 	}
 	
-	public String getDOTRep(List<String> path) {
+	public String getDOTRepHighlighted(List<String> path) {
 		// TODO Auto-generated method stub
 		return null;
 	}
