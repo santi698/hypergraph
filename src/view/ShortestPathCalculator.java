@@ -25,13 +25,13 @@ public class ShortestPathCalculator {
 			//TODO Crear una funcion que parsee la entrada y llame a la funcion con los argumentos correctos.
 			List<String> path = graph.getShortestPath(Approach.EXACT);
 			
-			System.out.println("La longitud del camino más corto es: " + path.size()); //ESTO NO ESTA BIEN, DEBERIA SER EL PESO 
+			System.out.println("La longitud del camino mï¿½s corto es: " + path.size()); //ESTO NO ESTA BIEN, DEBERIA SER EL PESO 
 																					   //DE LA SUMA DEL CAMINO, NO LA CANTIDAD DE EJES
 			
 			TaskHypergraph subgraph = graph.getSubgraph(path);
 			FileManager.createFileWithContent(result + ".dot", graph.getDOTRep());
 			FileManager.createFileWithContent(result + ".min.hg", subgraph.getHgRep());
-			FileManager.createFileWithContent(result + ".min.dot", graph.getDOTRep(path));
+			FileManager.createFileWithContent(result + ".min.dot", graph.getDOTRepHighlighted(path));
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
 		}
